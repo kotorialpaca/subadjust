@@ -35,8 +35,6 @@ func main() {
     
     _, err = fmt.Scanln(&conf)
     
-    check(err)
-    
     if !(conf == "y" || conf == "yes") {
         log.Fatal("Invalid input - Quiting...")
     }
@@ -48,7 +46,9 @@ func main() {
 
     _, err = fmt.Scanln(&str_st)
     
-    check(err)
+    if err != nil {
+        log.Fatal("Invalid input - Quiting...")
+    }
     
     sttime = toMilli(str_st)
 
@@ -62,11 +62,14 @@ func main() {
     
     _, err = fmt.Scanln(&ostr)
     
-    check(err)
+    if err != nil {
+        log.Fatal("Invalid input - Quiting...")
+    }
     
     offset, err = strconv.Atoi(ostr)
     
     check(err)
+
     
     for _, name := range fl {
         modifyFile(name, sttime, offset)
