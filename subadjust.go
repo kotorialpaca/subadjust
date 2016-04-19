@@ -19,14 +19,16 @@ import (
 func main() {
 
     fmt.Println("------------------")
-    fl, err := filepath.Glob("*.smi")
+
+    fl, err := filepath.Glob("inp" + string(os.PathSeparator) +  "*.smi")
     
     check(err)
     
     for _, name := range fl {
-        fmt.Println(name)
+        fmt.Println(strings.TrimLeft(name, "inp" + string(os.PathSeparator)))
     }
     fmt.Println("------------------")
+        
     fmt.Println("Files above are currently in the directory. Would you like to proceed? \nType y or yes to continue:")
 
     var conf string
@@ -72,6 +74,7 @@ func main() {
     
     fmt.Println("Operations Complete")
     
+    fmt.Println("\nConverted subtitles have been placed in the mdf folder of the root directory")
 }
 //Helper Functions
 
@@ -97,7 +100,7 @@ func modifyFile(fn string, ts int, offset int) error{
     defer fr.Close()
     check(err)
     
-    fw, err := os.Create("mdf/" + fn)
+    fw, err := os.Create("mdf" + string(os.PathSeparator) + strings.TrimLeft(fn, "inp" + string(os.PathSeparator)))
     defer fw.Close()
     check(err)
     
