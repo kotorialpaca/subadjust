@@ -16,7 +16,9 @@ import (
 )
 
 func main() {
-
+	fmt.Println("------------------------------------------------------------------------")
+	fmt.Println("|| Subadjust - Subtitle Sync Adjuster")
+	fmt.Println("------------------------------------------------------------------------")
 	if _, err := os.Stat("mdf"); os.IsNotExist(err) {
 		_ = os.Mkdir("mdf", 0777)
 	}
@@ -25,8 +27,8 @@ func main() {
 		_ = os.Mkdir("inp", 0777)
 		log.Fatal("Fatal: Input folder, 'inp' is currently empty. \bPlease copy or move the files into the directory and try again.")
 	}
-
-	fmt.Println("------------------")
+	fmt.Println("|| Current files in directory: ")
+	fmt.Println("------------------------------------------------------------------------")
 
 	fl, err := filepath.Glob("inp" + string(os.PathSeparator) + "*.smi")
 
@@ -35,7 +37,9 @@ func main() {
 	for _, name := range fl {
 		fmt.Println(strings.TrimLeft(name, "inp"+string(os.PathSeparator)))
 	}
-	fmt.Println("------------------")
+	
+	
+	fmt.Println("------------------------------------------------------------------------")
 
 	fmt.Println("Files above are currently in the directory. Would you like to proceed? \nType y or yes to continue:")
 
